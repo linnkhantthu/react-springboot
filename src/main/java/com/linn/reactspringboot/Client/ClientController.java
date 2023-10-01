@@ -10,33 +10,34 @@ import java.util.List;
 @RequestMapping(path = "/clients")
 public class ClientController {
     private final ClientService clientService;
+
     @Autowired
     public ClientController(ClientService clientService) {
         this.clientService = clientService;
     }
 
     @GetMapping
-    public List<Client> getClients(){
+    public List<Client> getClients() {
         return clientService.getClients();
     }
 
     @GetMapping(path = "/{id}")
-    public Client getClient(@PathVariable Long id){
+    public Client getClient(@PathVariable Long id) {
         return clientService.getClient(id);
     }
 
     @PostMapping
-    public ResponseEntity createClient(@RequestBody Client client) throws URISyntaxException{
+    public ResponseEntity<Client> createClient(@RequestBody Client client) throws URISyntaxException {
         return clientService.createClient(client);
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity updateClient(@PathVariable Long id, @RequestBody Client client){
+    public ResponseEntity<Client> updateClient(@PathVariable Long id, @RequestBody Client client) {
         return clientService.updateClient(id, client);
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity deleteClient(@PathVariable Long id){
+    public ResponseEntity<Client> deleteClient(@PathVariable Long id) {
         return clientService.deleteClient(id);
     }
 }
