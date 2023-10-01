@@ -14,8 +14,8 @@ class ClientEdit extends Component {
     this.state = {
       item: this.emptyItem,
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this); // Making this public
+    this.handleSubmit = this.handleSubmit.bind(this); // Making this public
   }
   async componentDidMount() {
     if (this.props.match.params.id !== "new") {
@@ -29,7 +29,7 @@ class ClientEdit extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-    let item = { ...this.state.item };
+    let item = this.state.item;
     item[name] = value;
     this.setState({ item });
   }
