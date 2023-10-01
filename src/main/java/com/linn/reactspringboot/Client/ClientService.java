@@ -22,14 +22,14 @@ public class ClientService {
         return clientRepository.findById(id).orElseThrow(() -> new IllegalStateException("Client does not exist"));
     }
 
-    public ResponseEntity createClient(Client client) throws URISyntaxException{
+    public ResponseEntity<Client> createClient(Client client) throws URISyntaxException{
         System.out.println(client);
         Client savedClient = clientRepository.save(client);
         return ResponseEntity.created(new URI("/clients/" + savedClient.getId())).body(savedClient);
 
     }
 
-    public ResponseEntity updateClient(Long id, Client client){
+    public ResponseEntity<Client> updateClient(Long id, Client client){
         Client currentClient = clientRepository.findById(id).orElseThrow(()-> new IllegalStateException("Did not find the client"));
         currentClient.setName(client.getName());
         currentClient.setEmail(client.getEmail());
@@ -37,7 +37,7 @@ public class ClientService {
         return ResponseEntity.ok(currentClient);
     }
 
-    public ResponseEntity deleteClient(Long id){
+    public ResponseEntity<Client> deleteClient(Long id){
         clientRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
